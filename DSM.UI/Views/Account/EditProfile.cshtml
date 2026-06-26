@@ -1,0 +1,230 @@
+﻿@model DSM.Models.Entities.User
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* MAIN */
+
+    .main {
+        margin-left: 280px;
+        padding: 40px;
+    }
+
+    /* TOPBAR */
+
+    .topbar {
+        background: white;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .badge-box {
+        background: #0f172a;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 8px;
+    }
+
+    /* PROFILE CARD */
+
+    .profile-card {
+        background: white;
+        border-radius: 18px;
+        padding: 35px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        max-width: 850px;
+    }
+
+        .profile-card h2 {
+            color: #16a34a;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+    .form-control {
+        height: 50px;
+        border-radius: 10px;
+    }
+
+    textarea.form-control {
+        height: 120px;
+    }
+
+    .btn-update {
+        background: #16a34a;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+        .btn-update:hover {
+            background: #15803d;
+        }
+
+</style>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h2>👤 User Panel</h2>
+
+    <a asp-controller="Account"
+       asp-action="Dashboard">
+        🏠 Dashboard
+    </a>
+
+    <a asp-controller="Booking"
+       asp-action="MyBookings">
+        📦 Booking History
+    </a>
+
+    <a asp-controller="Account"
+       asp-action="EditProfile">
+        👤 Profile
+    </a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-controller="Account"
+       asp-action="Logout"
+       style="color:#f87171;">
+        🚪 Logout
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h3>👤 Edit Profile</h3>
+
+        <span class="badge-box">
+            User Dashboard
+        </span>
+
+    </div>
+
+    <div class="profile-card">
+
+        <h2>Edit Your Profile</h2>
+
+        <form asp-action="EditProfile"
+              method="post">
+
+            <input asp-for="UserId" hidden />
+
+            <div class="mb-3">
+
+                <label class="fw-bold">
+                    Name
+                </label>
+
+                <input asp-for="Name"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="fw-bold">
+                    Email
+                </label>
+
+                <input asp-for="Email"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="fw-bold">
+                    Phone
+                </label>
+
+                <input asp-for="Phone"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="fw-bold">
+                    Address
+                </label>
+
+                <textarea asp-for="Address"
+                          class="form-control"></textarea>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="fw-bold">
+                    Password
+                </label>
+
+                <input asp-for="Password"
+                       class="form-control" />
+
+            </div>
+
+            <button type="submit"
+                    class="btn-update">
+
+                Update Profile
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

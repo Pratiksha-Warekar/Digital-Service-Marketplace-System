@@ -1,0 +1,296 @@
+﻿@model List<DSM.Models.Entities.Service>
+
+@{
+    ViewData["Title"] = "All Services";
+}
+
+<style>
+
+    body {
+        background: #f8fafc;
+        font-family: 'Segoe UI';
+    }
+
+    /* ===== HERO ===== */
+
+    .service-hero {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        padding: 70px 20px;
+        border-radius: 30px;
+        color: white;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .service-hero::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+            bottom: -120px;
+            left: -80px;
+        }
+
+    .service-title {
+        font-size: 55px;
+        font-weight: 800;
+        position: relative;
+        z-index: 2;
+    }
+
+    .service-subtitle {
+        font-size: 18px;
+        color: #cbd5e1;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* ===== CARD ===== */
+
+    .service-card {
+        background: white;
+        border-radius: 28px;
+        overflow: hidden;
+        transition: 0.35s;
+        height: 100%;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+        }
+
+            .service-card:hover .service-img {
+                transform: scale(1.06);
+            }
+
+    .image-wrapper {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .service-img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        transition: 0.4s;
+    }
+
+    .service-badge {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        background: rgba(15,23,42,0.9);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .service-content {
+        padding: 28px;
+    }
+
+        .service-content h3 {
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+    .description {
+        color: #64748b;
+        line-height: 1.7;
+        min-height: 70px;
+    }
+
+    .info-box {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 16px;
+        margin-top: 20px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .info-item {
+        margin-bottom: 10px;
+        color: #334155;
+        font-size: 15px;
+    }
+
+        .info-item span {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+    .price-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+    }
+
+    .price {
+        color: #16a34a;
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    .book-btn {
+        padding: 12px 24px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+        border: none;
+    }
+
+    .login-btn {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: white;
+    }
+
+    .booking-btn {
+        background: linear-gradient(135deg, #16a34a, #15803d);
+        color: white;
+    }
+
+    .book-btn:hover {
+        transform: scale(1.04);
+        color: white;
+    }
+
+</style>
+
+<div class="container py-5">
+
+    <!-- HERO -->
+
+    <div class="service-hero">
+
+        <h1 class="service-title">
+            Explore Professional Services
+        </h1>
+
+        <p class="service-subtitle mt-3">
+            Find trusted and verified service providers near you
+        </p>
+
+    </div>
+
+    <!-- SERVICES -->
+
+    <div class="row g-4">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-card">
+
+                    <!-- IMAGE -->
+
+                    <div class="image-wrapper">
+
+                        <img src="@item.PhotoURL"
+                             class="service-img" />
+
+                        <div class="service-badge">
+                            Verified Service
+                        </div>
+
+                    </div>
+
+                    <!-- CONTENT -->
+
+                    <div class="service-content">
+
+                        <h3>
+                            @item.ServiceName
+                        </h3>
+
+                        <p class="description">
+                            @item.Description
+                        </p>
+
+                        <!-- INFO -->
+
+                        <div class="info-box">
+
+                            <div class="info-item">
+
+                                <span>Provider:</span>
+                                @item.ProviderName
+
+                            </div>
+
+                            <div class="info-item">
+
+                                <span>Address:</span>
+                                @item.Address
+
+                            </div>
+
+                           
+
+                        </div>
+
+                        <!-- PRICE + BUTTON -->
+
+                        <div class="price-box">
+
+                            <div class="price">
+                                ₹ @item.Price
+                            </div>
+
+                            @if (Context.Session.GetInt32("UserId") == null)
+                            {
+                                <a asp-controller="Account"
+                                   asp-action="Login"
+                                   class="book-btn login-btn">
+
+                                    Book Now
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Booking"
+                                   asp-action="Create"
+                                   asp-route-serviceId="@item.ServiceId"
+                                   class="book-btn booking-btn">
+
+                                    Book Now
+
+                                </a>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,270 @@
+﻿@model DSM.Models.Entities.Provider
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* MAIN */
+
+    .main {
+        margin-left: 280px;
+        padding: 40px;
+    }
+
+    /* TOPBAR */
+
+    .topbar {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .topbar h3 {
+            margin: 0;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+    .badge-box {
+        background: #0f172a;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+    }
+
+    /* PROFILE CARD */
+
+    .profile-card {
+        background: white;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        max-width: 850px;
+    }
+
+        .profile-card h2 {
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 25px;
+        }
+
+    .form-label {
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        height: 52px;
+        border-radius: 12px;
+        border: 1px solid #dbeafe;
+    }
+
+    textarea.form-control {
+        height: 120px;
+        resize: none;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #2563eb;
+    }
+
+    .btn-save {
+        background: #2563eb;
+        color: white;
+        border: none;
+        height: 52px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 17px;
+        width: 100%;
+    }
+
+        .btn-save:hover {
+            background: #1d4ed8;
+        }
+
+</style>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h2>Provider Panel</h2>
+
+    <a asp-controller="Provider" asp-action="Dashboard">
+        🏠 Dashboard
+    </a>
+
+    <a asp-controller="Provider" asp-action="AddService">
+        ➕ Add Service
+    </a>
+
+    <a asp-controller="Provider" asp-action="ManageServices">
+        🛎️ My Services
+    </a>
+
+    <a asp-controller="Booking" asp-action="BookingRequests">
+        📦 Booking Requests
+    </a>
+
+    <a asp-controller="Provider" asp-action="EditProfile">
+        👤 Edit Profile
+    </a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-controller="Provider"
+       asp-action="Logout"
+       style="color:#f87171;">
+        🚪 Logout
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h3>👤 Edit Profile</h3>
+
+        <span class="badge-box">
+            Provider Dashboard
+        </span>
+
+    </div>
+
+    <div class="profile-card">
+
+        <h2>Edit Provider Profile</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Success"]
+            </div>
+        }
+
+        <form asp-action="EditProfile" method="post">
+
+            <input asp-for="ProviderId" type="hidden" />
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Full Name
+                </label>
+
+                <input asp-for="Name"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Email
+                </label>
+
+                <input asp-for="Email"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input asp-for="Password"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Phone Number
+                </label>
+
+                <input asp-for="Phone"
+                       class="form-control" />
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Address
+                </label>
+
+                <textarea asp-for="Address"
+                          class="form-control"></textarea>
+
+            </div>
+
+            <button type="submit"
+                    class="btn-save">
+
+                Update Profile
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,222 @@
+﻿@{
+    var user = ViewBag.User;
+    ViewData["Title"] = "User Dashboard";
+}
+
+<style>
+
+    /* ===== BODY ===== */
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* ===== MAIN ===== */
+    .main {
+        margin-left: 270px;
+        padding: 25px;
+    }
+
+    /* ===== CARDS ===== */
+    .card-box {
+        background: white;
+        padding: 22px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+        .card-box:hover {
+            transform: translateY(-5px);
+        }
+
+    /* GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    /* HEADER */
+    .topbar {
+        background: white;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .badge {
+        background: #0f172a;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+
+    .btn-small {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .edit-btn {
+        background: #2563eb;
+        color: white;
+    }
+
+    .delete-btn {
+        background: #dc2626;
+        color: white;
+    }
+
+</style>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <h2>👤 User Panel</h2>
+
+    <a href="#">🏠 Dashboard</a>
+
+    <a asp-controller="Booking"
+       asp-action="MyBookings">
+
+        📦 Booking History
+
+    </a>
+
+    <a asp-controller="Account"
+       asp-action="EditProfile">
+
+        👤 Profile
+
+    </a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-controller="Account"
+       asp-action="Logout"
+       style="color:#f87171;">
+
+        🚪 Logout
+
+    </a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOP -->
+    <div class="topbar">
+
+        <h3>
+            Welcome,
+            <b>@user?.Name</b> 👋
+        </h3>
+
+        <span class="badge">
+            User Dashboard
+        </span>
+
+    </div>
+
+    <!-- ONLY 3 SECTIONS -->
+
+    <div class="grid">
+
+        <!-- BOOKING HISTORY -->
+        <div class="card-box">
+
+            <h3>📦 Booking History</h3>
+
+            <p>
+                View all your booked services
+            </p>
+
+            <a asp-controller="Booking"
+               asp-action="MyBookings"
+               class="btn-small edit-btn">
+
+                View Bookings
+
+            </a>
+
+        </div>
+
+        <!-- PROFILE UPDATE -->
+        <div class="card-box">
+
+            <h3>👤 Profile Edit</h3>
+
+            <p>
+                Update your personal details
+            </p>
+
+            <a asp-controller="Account"
+               asp-action="EditProfile"
+               class="btn-small edit-btn">
+
+                Edit Profile
+
+            </a>
+
+        </div>
+
+        <!-- DELETE PROFILE -->
+        <div class="card-box">
+
+            <h3>🗑️ Delete Account</h3>
+
+            <p>
+                Permanently delete your account
+            </p>
+
+            <a asp-controller="Account"
+               asp-action="DeleteAccount"
+               class="btn-small delete-btn">
+
+                Delete
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

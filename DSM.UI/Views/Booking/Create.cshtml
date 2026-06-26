@@ -1,0 +1,142 @@
+﻿@model DSM.Models.Entities.BookingRequest
+
+@{
+    ViewData["Title"] = "Book Service";
+}
+
+<div class="container mt-5 mb-5">
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-center fw-bold">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="row">
+
+        <!-- LEFT SIDE -->
+        <div class="col-md-4">
+
+            <div class="card shadow-lg border-0 rounded-4 p-3">
+
+                <img src="@Model.PhotoURL"
+                     class="img-fluid rounded-4"
+                     style="height:250px; object-fit:cover;" />
+
+                <div class="mt-4">
+
+                    <h3 class="fw-bold">
+                        @Model.ServiceName
+                    </h3>
+
+                    <p class="text-muted mb-1">
+                        Provider:
+                        <b>@Model.ProviderName</b>
+                    </p>
+
+                    <h4 class="text-success fw-bold">
+                        ₹ @Model.Price
+                    </h4>
+
+                    <hr />
+
+                    <p>✔ Trusted Service</p>
+
+                    <p>✔ Verified Provider</p>
+
+                    <p>✔ Best Quality Work</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-md-8">
+
+            <div class="card shadow-lg border-0 rounded-4 p-4">
+
+                <h1 class="fw-bold text-primary mb-3">
+                    Confirm Your Booking
+                </h1>
+
+                <p class="text-muted mb-4">
+                    Fill all details to complete booking
+                </p>
+
+                <form method="post">
+
+                    <input type="hidden"
+                           asp-for="ServiceId" />
+
+                    <input type="hidden"
+                           asp-for="ServiceName" />
+
+                    <input type="hidden"
+                           asp-for="ProviderName" />
+
+                    <input type="hidden"
+                           asp-for="Price" />
+
+                    <input type="hidden"
+                           asp-for="PhotoURL" />
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="fw-bold">
+                                Full Name
+                            </label>
+
+                            <input asp-for="UserName"
+                                   class="form-control form-control-lg"
+                                   readonly />
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="fw-bold">
+                                Phone Number
+                            </label>
+
+                            <input asp-for="Phone"
+                                   class="form-control form-control-lg"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="fw-bold">
+                            Address
+                        </label>
+
+                        <textarea asp-for="Address"
+                                  class="form-control"
+                                  rows="5"
+                                  required></textarea>
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-success btn-lg px-5">
+
+                        Confirm Booking
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

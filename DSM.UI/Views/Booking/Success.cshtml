@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Booking Success";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow-lg border-0 rounded-4 p-5 text-center">
+
+                <div class="mb-4">
+
+                    <i class="fa fa-check-circle text-success"
+                       style="font-size:90px;">
+                    </i>
+
+                </div>
+
+                <h1 class="fw-bold text-success">
+                    Booking Successful
+                </h1>
+
+                <p class="text-muted mt-3 fs-5">
+
+                    Your booking request has been
+                    submitted successfully.
+
+                </p>
+
+                <hr class="my-4" />
+
+                <a asp-controller="Booking"
+                   asp-action="MyBookings"
+                   class="btn btn-primary btn-lg rounded-3 px-5">
+
+                    View My Bookings
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FONT AWESOME -->
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

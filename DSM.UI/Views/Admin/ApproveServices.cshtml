@@ -1,0 +1,295 @@
+﻿<div class="container mt-5">
+@model List<DSM.Models.Entities.Service>
+
+@{
+    ViewData["Title"] = "Approve Services";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+
+            .sidebar h2 {
+                margin-bottom: 25px;
+            }
+
+            .sidebar a {
+                display: block;
+                color: #cbd5e1;
+                padding: 12px;
+                text-decoration: none;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+                .sidebar a:hover {
+                    background: #1e293b;
+                    color: white;
+                }
+
+
+    /* MAIN */
+
+    .main {
+        margin-left: 280px;
+        padding: 40px;
+    }
+
+    /* HEADER */
+
+    .topbar {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 18px;
+        margin-bottom: 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+        .topbar h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .topbar p {
+            margin: 0;
+            color: gray;
+        }
+
+    /* CARD */
+
+    .service-card {
+        background: white;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        transition: 0.3s;
+        height: 100%;
+    }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+    .service-img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .service-content {
+        padding: 22px;
+    }
+
+    .service-title {
+        font-size: 30px;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .provider-name {
+        color: #475569;
+        font-weight: 600;
+    }
+
+    .price {
+        font-size: 28px;
+        font-weight: 800;
+        color: #16a34a;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 600;
+        background: #e2e8f0;
+        color: #0f172a;
+    }
+
+    .description {
+        color: #64748b;
+        line-height: 1.7;
+    }
+
+    /* BUTTONS */
+
+    .btn-approve {
+        background: #16a34a;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-approve:hover {
+            background: #15803d;
+            color: white;
+        }
+
+    .btn-reject {
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+        width: 100%;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-reject:hover {
+            background: #b91c1c;
+            color: white;
+        }
+
+</style>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>Admin Panel</h2>
+
+        <a asp-controller="Admin" asp-action="Dashboard">🏠 Dashboard</a>
+        <a asp-controller="Admin" asp-action="ManageUsers">👥 Manage Users</a>
+        <a asp-controller="Admin" asp-action="ManageProviders">🧑‍🔧 Providers</a>
+        <a asp-controller="Category" asp-action="Index">📂 Categories</a>
+        <a asp-controller="Admin" asp-action="ManageServices">🛎️ Services</a>
+        <a asp-controller="Admin" asp-action="ApproveServices">✅ Approvals</a>
+
+        <hr style="border-color:#334155;" />
+
+        <a asp-controller="Admin" asp-action="Logout" style="color:#f87171;">
+            🚪 Logout
+        </a>
+
+    </div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div>
+            <h1>Approve Services</h1>
+            <p>Manage uploaded provider services</p>
+        </div>
+
+        <span class="status-badge">
+            Admin Approval Panel
+        </span>
+
+    </div>
+
+    <!-- SERVICES -->
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="service-card">
+
+                    <!-- IMAGE -->
+
+                    <img src="@item.PhotoURL"
+                         class="service-img" />
+
+                    <!-- CONTENT -->
+
+                    <div class="service-content">
+
+                        <h3 class="service-title">
+
+                            @item.ServiceName
+
+                        </h3>
+
+                        <p class="provider-name mb-2">
+
+                            👤 Provider:
+                            @item.ProviderName
+
+                        </p>
+
+                        <h4 class="price mb-3">
+
+                            ₹ @item.Price
+
+                        </h4>
+
+                        <p>
+
+                            <span class="status-badge">
+
+                                @item.Status
+
+                            </span>
+
+                        </p>
+
+                        <p class="description mt-3">
+
+                            @item.Description
+
+                        </p>
+
+                        <!-- BUTTONS -->
+
+                        <div class="d-flex gap-3 mt-4">
+
+                            <a asp-action="Approve"
+                               asp-route-id="@item.ServiceId"
+                               class="btn-approve">
+
+                                Approve
+
+                            </a>
+
+                            <a asp-action="Reject"
+                               asp-route-id="@item.ServiceId"
+                               class="btn-reject">
+
+                                Reject
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

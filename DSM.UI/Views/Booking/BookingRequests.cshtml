@@ -1,0 +1,346 @@
+﻿@model List<DSM.Models.Entities.BookingRequest>
+
+@{
+    ViewData["Title"] = "Booking Requests";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* MAIN */
+
+    .main {
+        margin-left: 280px;
+        padding: 40px;
+    }
+
+    /* TOPBAR */
+
+    .topbar {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .topbar h3 {
+            margin: 0;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+    .badge-box {
+        background: #0f172a;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+    }
+
+    /* TABLE CARD */
+
+    .table-card {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        overflow-x: auto;
+    }
+
+    /* TABLE */
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .custom-table thead {
+            background: #0f172a;
+            color: white;
+        }
+
+        .custom-table th {
+            padding: 18px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .custom-table td {
+            padding: 18px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+
+        .custom-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+    /* COLUMN WIDTHS */
+
+    .user-col {
+        min-width: 220px;
+    }
+
+    .service-col {
+        min-width: 180px;
+    }
+
+    .address-col {
+        min-width: 250px;
+    }
+
+    .date-col {
+        min-width: 180px;
+    }
+
+    .status-col {
+        min-width: 120px;
+    }
+
+    .action-col {
+        min-width: 240px;
+    }
+
+    /* BUTTONS */
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .btn-action {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 100px;
+        height: 42px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+    }
+
+    .btn-approve {
+        background: #16a34a;
+    }
+
+        .btn-approve:hover {
+            background: #15803d;
+            color: white;
+        }
+
+    .btn-reject {
+        background: #dc2626;
+    }
+
+        .btn-reject:hover {
+            background: #b91c1c;
+            color: white;
+        }
+
+    /* STATUS */
+
+    .status-approved {
+        color: #16a34a;
+        font-weight: 700;
+    }
+
+    .status-pending {
+        color: #f59e0b;
+        font-weight: 700;
+    }
+
+    .status-rejected {
+        color: #dc2626;
+        font-weight: 700;
+    }
+
+</style>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h2>Provider Panel</h2>
+
+    <a asp-controller="Provider" asp-action="Dashboard">
+        🏠 Dashboard
+    </a>
+
+    <a asp-controller="Provider" asp-action="AddService">
+        ➕ Add Service
+    </a>
+
+    <a asp-controller="Provider" asp-action="ManageServices">
+        🛎️ My Services
+    </a>
+
+    <a asp-controller="Booking" asp-action="BookingRequests">
+        📦 Booking Requests
+    </a>
+
+    <a asp-controller="Provider" asp-action="EditProfile">
+        👤 Edit Profile
+    </a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-controller="Provider"
+       asp-action="Logout"
+       style="color:#f87171;">
+
+        🚪 Logout
+
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h3>📦 Booking Requests</h3>
+
+        <span class="badge-box">
+            Provider Dashboard
+        </span>
+
+    </div>
+
+    <div class="table-card">
+
+        <table class="custom-table">
+
+            <thead>
+
+                <tr>
+                    <th class="user-col">User</th>
+                    <th class="service-col">Service</th>
+                    <th class="address-col">Address</th>
+                    <th class="date-col">Booking Date</th>
+                    <th class="status-col">Status</th>
+                    <th class="action-col">Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td class="user-col">
+                            @item.UserName
+                        </td>
+
+                        <td class="service-col">
+                            @item.ServiceName
+                        </td>
+
+                        <td class="address-col">
+                            @item.Address
+                        </td>
+
+                        <td class="date-col">
+                            @item.BookingDate
+                        </td>
+
+                        <td class="status-col">
+
+                            @if (item.Status == "Approved")
+                            {
+                                <span class="status-approved">
+                                    Approved
+                                </span>
+                            }
+                            else if (item.Status == "Rejected")
+                            {
+                                <span class="status-rejected">
+                                    Rejected
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status-pending">
+                                    Pending
+                                </span>
+                            }
+
+                        </td>
+
+                        <td class="action-col">
+
+                            <div class="action-buttons">
+
+                                <a asp-action="Approve"
+                                   asp-route-id="@item.BookingRequestId"
+                                   class="btn-action btn-approve">
+
+                                    Approve
+
+                                </a>
+
+                                <a asp-action="Reject"
+                                   asp-route-id="@item.BookingRequestId"
+                                   class="btn-action btn-reject">
+
+                                    Reject
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

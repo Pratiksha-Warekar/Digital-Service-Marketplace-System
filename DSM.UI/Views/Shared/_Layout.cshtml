@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - DSM Project</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+</head>
+
+<body>
+
+    @{
+        var userId = Context.Session.GetInt32("UserId");
+        var userName = Context.Session.GetString("UserName");
+    }
+
+    <!-- NAVBAR START -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand fw-bold"
+               asp-controller="Home"
+               asp-action="Index">
+
+                Digital Service Marketplace System
+
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse"
+                 id="navbarNav">
+
+                <!-- LEFT SIDE MENU -->
+                <div class="collapse navbar-collapse"
+                     id="navbarNav">
+
+                    <!-- LEFT SIDE MENU -->
+                    <ul class="navbar-nav me-auto">
+
+                        <li class="nav-item">
+
+                            <a class="nav-link nav-link-custom"
+                               asp-controller="Home"
+                               asp-action="Index">
+
+                                Home
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link nav-link-custom"
+                               asp-controller="Service"
+                               asp-action="Index">
+
+                                Services
+
+                            </a>
+
+                        </li>
+
+                        <!-- LOGIN / REGISTER LEFT SIDE -->
+                        @if (userId == null)
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link nav-link-custom"
+                                   asp-controller="Account"
+                                   asp-action="Register">
+
+                                    Register
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link nav-link-custom"
+                                   asp-controller="Account"
+                                   asp-action="Login">
+
+                                    Login
+
+                                </a>
+
+                            </li>
+                        }
+
+                    </ul>
+
+                    <!-- RIGHT SIDE MENU -->
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item">
+
+                            @if (Context.Session.GetString("Provider") != null)
+                            {
+                                <a class="nav-link nav-link-custom"
+                                   asp-controller="Provider"
+                                   asp-action="Dashboard">
+
+                                    Service Provider
+
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="nav-link nav-link-custom"
+                                   asp-controller="Provider"
+                                   asp-action="Login">
+
+                                    Service Provider
+
+                                </a>
+                            }
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link nav-link-custom"
+                               asp-controller="Admin"
+                               asp-action="Dashboard">
+
+                                Admin Control
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                    @if (userId != null)
+                    {
+                        <!-- USER INFO -->
+
+                        <li class="nav-item">
+
+                            <span class="nav-link text-warning fw-bold">
+
+                                Hello, @userName
+
+                            </span>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link text-danger fw-bold"
+                               asp-controller="Account"
+                               asp-action="Logout">
+
+                                Logout
+
+                            </a>
+
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- NAVBAR END -->
+
+    <div class="container mt-4">
+
+        @RenderBody()
+
+    </div>
+
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+﻿@{
+    var admin = ViewBag.Admin;
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* MAIN */
+    .main {
+        margin-left: 270px;
+        padding: 25px;
+    }
+
+    /* TOPBAR */
+    .topbar {
+        background: white;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .badge {
+        background: #0f172a;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+
+    /* GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    /* CARD */
+    .card-box {
+        background: white;
+        padding: 22px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+        .card-box:hover {
+            transform: translateY(-5px);
+        }
+
+    .btn-small {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        background: #2563eb;
+        color: white;
+    }
+
+    .btn-danger-small {
+        background: #dc2626;
+    }
+
+</style>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <h2>Admin Panel</h2>
+
+    <a asp-controller="Admin" asp-action="Dashboard">🏠 Dashboard</a>
+    <a asp-controller="Admin" asp-action="ManageUsers">👥 Manage Users</a>
+    <a asp-controller="Admin" asp-action="ManageProviders">🧑‍🔧 Providers</a>
+    <a asp-controller="Category" asp-action="Index">📂 Categories</a>
+    <a asp-controller="Admin" asp-action="ManageServices">🛎️ Services</a>
+    <a asp-controller="Admin" asp-action="ApproveServices">✅ Approvals</a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-controller="Admin" asp-action="Logout" style="color:#f87171;">
+        🚪 Logout
+    </a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOP -->
+    <div class="topbar">
+        <h3>Welcome Admin 👨‍💼</h3>
+        <span class="badge">Admin Dashboard</span>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid">
+
+        <div class="card-box">
+            <h3>👥 Manage Users</h3>
+            <p>View and manage registered users</p>
+            <a asp-controller="Admin" asp-action="ManageUsers" class="btn-small">Open</a>
+        </div>
+
+        <div class="card-box">
+            <h3>🧑‍🔧 Service Providers</h3>
+            <p>Manage all providers</p>
+            <a asp-controller="Admin" asp-action="ManageProviders" class="btn-small">Open</a>
+        </div>
+
+        <div class="card-box">
+            <h3>📂 Categories</h3>
+            <p>Add/Edit service categories</p>
+            <a asp-controller="Category" asp-action="Index" class="btn-small">Open</a>
+        </div>
+
+        <div class="card-box">
+            <h3>🛎️ Services</h3>
+            <p>Control all uploaded services</p>
+            <a asp-controller="Admin" asp-action="ManageServices" class="btn-small">Open</a>
+        </div>
+
+        <div class="card-box">
+            <h3>✅ Approvals</h3>
+            <p>Approve or reject services</p>
+            <a asp-controller="Admin" asp-action="ApproveServices" class="btn-small">Open</a>
+        </div>
+
+    </div>
+
+</div>

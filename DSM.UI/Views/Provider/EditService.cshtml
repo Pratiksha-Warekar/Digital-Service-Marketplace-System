@@ -1,0 +1,87 @@
+﻿@model DSM.Models.Entities.Service
+
+<div class="container py-5">
+
+    <div class="card shadow-lg p-5 border-0 rounded-4">
+
+        <h1 class="fw-bold text-primary mb-4">
+
+            Edit Service
+
+        </h1>
+
+        <form asp-action="EditService"
+              method="post"
+              enctype="multipart/form-data">
+
+            <input type="hidden"
+                   asp-for="ServiceId" />
+
+            <input type="hidden"
+                   asp-for="PhotoURL" />
+
+            <div class="mb-4">
+
+                <label class="fw-bold mb-2">
+
+                    Service Name
+
+                </label>
+
+                <input asp-for="ServiceName"
+                       class="form-control form-control-lg" />
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="fw-bold mb-2">
+
+                    Description
+
+                </label>
+
+                <textarea asp-for="Description"
+                          class="form-control"
+                          rows="5"></textarea>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="fw-bold mb-2">
+
+                    Price
+
+                </label>
+
+                <input asp-for="Price"
+                       class="form-control form-control-lg" />
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="fw-bold mb-2">
+
+                    Update Image
+
+                </label>
+
+                <input type="file"
+                       name="PhotoFile"
+                       class="form-control" />
+
+            </div>
+
+            <button class="btn btn-success btn-lg">
+
+                Update Service
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

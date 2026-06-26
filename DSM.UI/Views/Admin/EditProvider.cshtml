@@ -1,0 +1,228 @@
+﻿<div class="container mt-5">
+@model DSM.Models.Entities.Provider
+
+@{
+    ViewData["Title"] = "Edit Provider";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+
+            .sidebar h2 {
+                margin-bottom: 25px;
+            }
+
+            .sidebar a {
+                display: block;
+                color: #cbd5e1;
+                padding: 12px;
+                text-decoration: none;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+                .sidebar a:hover {
+                    background: #1e293b;
+                    color: white;
+                }
+
+
+    /* MAIN */
+
+    .main {
+        margin-left: 280px;
+        padding: 40px;
+    }
+
+    /* CARD */
+
+    .edit-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .edit-title {
+        font-size: 35px;
+        font-weight: 800;
+        margin-bottom: 30px;
+        color: #0f172a;
+    }
+
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid #dbeafe;
+    }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #2563eb;
+        }
+
+    .btn-update {
+        background: #2563eb;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-update:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+</style>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>Admin Panel</h2>
+
+        <a asp-controller="Admin" asp-action="Dashboard">🏠 Dashboard</a>
+        <a asp-controller="Admin" asp-action="ManageUsers">👥 Manage Users</a>
+        <a asp-controller="Admin" asp-action="ManageProviders">🧑‍🔧 Providers</a>
+        <a asp-controller="Category" asp-action="Index">📂 Categories</a>
+        <a asp-controller="Admin" asp-action="ManageServices">🛎️ Services</a>
+        <a asp-controller="Admin" asp-action="ApproveServices">✅ Approvals</a>
+
+        <hr style="border-color:#334155;" />
+
+        <a asp-controller="Admin" asp-action="Logout" style="color:#f87171;">
+            🚪 Logout
+        </a>
+
+    </div>
+<!-- MAIN -->
+
+<div class="main">
+
+    <div class="edit-card">
+
+        <h1 class="edit-title">
+
+            Edit Provider
+
+        </h1>
+
+        <form asp-action="EditProvider"
+              method="post">
+
+            <input type="hidden"
+                   asp-for="ProviderId" />
+
+            <!-- NAME -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Full Name
+
+                </label>
+
+                <input asp-for="Name"
+                       class="form-control" />
+
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Email Address
+
+                </label>
+
+                <input asp-for="Email"
+                       class="form-control" />
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Phone Number
+
+                </label>
+
+                <input asp-for="Phone"
+                       class="form-control" />
+
+            </div>
+
+            <!-- ADDRESS -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Address
+
+                </label>
+
+                <input asp-for="Address"
+                       class="form-control" />
+
+            </div>
+
+            <!-- PASSWORD -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Password
+
+                </label>
+
+                <input asp-for="Password"
+                       class="form-control" />
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button type="submit"
+                    class="btn-update">
+
+                Update Provider
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

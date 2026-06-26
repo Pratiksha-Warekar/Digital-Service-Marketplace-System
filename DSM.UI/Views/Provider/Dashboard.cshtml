@@ -1,0 +1,228 @@
+﻿@{
+    var provider = ViewBag.Provider;
+    ViewData["Title"] = "Provider Dashboard";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* MAIN */
+    .main {
+        margin-left: 270px;
+        padding: 25px;
+    }
+
+    /* TOPBAR */
+    .topbar {
+        background: white;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .badge {
+        background: #0f172a;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+    }
+
+    /* GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    /* CARD */
+    .card-box {
+        background: white;
+        padding: 22px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+        .card-box:hover {
+            transform: translateY(-5px);
+        }
+
+    .btn-small {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+</style>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <h2>Provider Panel</h2>
+
+    <a asp-action="Dashboard">🏠 Dashboard</a>
+
+    <a asp-action="AddService">➕ Add Service</a>
+
+    <a asp-action="ManageServices">🛎️ My Services</a>
+
+    <a asp-controller="Booking"
+       asp-action="BookingRequests">
+
+        📦 Booking Requests
+
+    </a>
+
+    <a asp-action="EditProfile">
+
+        👤 Edit Profile
+
+    </a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-action="Logout"
+       style="color:#f87171;">
+
+        🚪 Logout
+
+    </a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOP -->
+    <div class="topbar">
+
+        <h3>
+            Welcome,
+            @ViewBag.ProviderName 👋
+        </h3>
+
+        <span class="badge">
+            Provider Dashboard
+        </span>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="grid">
+
+        <div class="card-box">
+
+            <h3>➕ Add Service</h3>
+
+            <p>
+                Create new service listing
+            </p>
+
+            <a asp-action="AddService"
+               class="btn-small">
+
+                Open
+
+            </a>
+
+        </div>
+
+        <div class="card-box">
+
+            <h3>🛎️ Manage Services</h3>
+
+            <p>
+                Edit or update your services
+            </p>
+
+            <a asp-action="ManageServices"
+               class="btn-small">
+
+                Open
+
+            </a>
+
+        </div>
+
+        <div class="card-box">
+
+            <h3>📦 Booking Requests</h3>
+
+            <p>
+                View customer bookings
+            </p>
+
+            <a asp-controller="Booking"
+               asp-action="BookingRequests"
+               class="btn-small">
+
+                Open
+
+            </a>
+
+        </div>
+
+        <!-- EDIT PROFILE -->
+
+        <div class="card-box">
+
+            <h3>👤 Edit Profile</h3>
+
+            <p>
+                Update your provider information
+            </p>
+
+            <a asp-action="EditProfile"
+               class="btn-small">
+
+                Open
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

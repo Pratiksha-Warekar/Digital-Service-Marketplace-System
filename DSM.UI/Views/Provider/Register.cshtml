@@ -1,0 +1,471 @@
+﻿@model DSM.Models.Entities.Provider
+
+@{
+    ViewData["Title"] = "Provider Register";
+}
+
+<style>
+
+    body {
+        background: linear-gradient(to right,#eef2ff,#f8fbff);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .register-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .register-card {
+        border: none;
+        border-radius: 30px;
+        overflow: hidden;
+        background: white;
+    }
+
+    /* LEFT SIDE */
+
+    .left-side {
+        background: linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+        color: white;
+        padding: 60px 45px;
+        position: relative;
+    }
+
+    .left-side::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 220px;
+        height: 220px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 50%;
+    }
+
+    .left-side::after {
+        content: "";
+        position: absolute;
+        bottom: -60px;
+        left: -60px;
+        width: 250px;
+        height: 250px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 50%;
+    }
+
+    .brand-title {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 60px;
+        z-index: 2;
+        position: relative;
+    }
+
+    .brand-subtitle {
+        margin-top: 20px;
+        line-height: 30px;
+        color: rgba(255,255,255,0.85);
+        z-index: 2;
+        position: relative;
+    }
+
+    .feature-box {
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.12);
+        padding: 18px 20px;
+        border-radius: 18px;
+        margin-top: 20px;
+        backdrop-filter: blur(10px);
+        z-index: 2;
+        position: relative;
+    }
+
+    .feature-box h6 {
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .feature-box p {
+        margin: 0;
+        font-size: 14px;
+        color: rgba(255,255,255,0.8);
+    }
+
+    /* RIGHT SIDE */
+
+    .form-section {
+        padding: 50px;
+    }
+
+    .main-title {
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 10px;
+    }
+
+    .sub-title {
+        color: #6b7280;
+        margin-bottom: 35px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 10px;
+    }
+
+    .form-control,
+    .form-select {
+        height: 56px;
+        border-radius: 16px;
+        border: 1px solid #dbe2ea;
+        padding-left: 18px;
+        font-size: 15px;
+    }
+
+    textarea.form-control {
+        height: 120px;
+        padding-top: 15px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
+        border-color: #2563eb;
+    }
+
+    .register-btn {
+        height: 58px;
+        border-radius: 18px;
+        border: none;
+        background: linear-gradient(to right,#2563eb,#1d4ed8);
+        font-size: 18px;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .register-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(37,99,235,0.25);
+    }
+
+    .login-link {
+        color: #2563eb;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .login-link:hover {
+        color: #1d4ed8;
+    }
+
+    .validation-summary-errors {
+        color: red;
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<div class="container register-wrapper">
+
+    <div class="card shadow-lg register-card w-100">
+
+        <div class="row g-0">
+
+            <!-- LEFT SIDE -->
+
+            <div class="col-lg-5">
+
+                <div class="left-side h-100 d-flex flex-column justify-content-center">
+
+                    <h1 class="brand-title">
+                        Grow Your Service Business With DSM
+                    </h1>
+
+                    <p class="brand-subtitle">
+                        Join our Digital Service Marketplace and connect with thousands of customers looking for trusted professionals.
+                    </p>
+
+                    <div class="feature-box">
+
+                        <h6>
+                            🚀 Get More Customers
+                        </h6>
+
+                        <p>
+                            Reach more users and increase bookings easily.
+                        </p>
+
+                    </div>
+
+                    <div class="feature-box">
+
+                        <h6>
+                            📅 Instant Booking Management
+                        </h6>
+
+                        <p>
+                            Accept and manage bookings professionally.
+                        </p>
+
+                    </div>
+
+                    <div class="feature-box">
+
+                        <h6>
+                            ⭐ Build Your Brand
+                        </h6>
+
+                        <p>
+                            Showcase your services with images and pricing.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="col-lg-7">
+
+                <div class="form-section">
+
+                    <h2 class="main-title">
+                        Provider Registration
+                    </h2>
+
+                    <p class="sub-title">
+                        Fill all required details to register your service business.
+                    </p>
+
+                    <!-- VALIDATION -->
+
+                    <div asp-validation-summary="All"
+                         class="validation-summary-errors">
+                    </div>
+
+                    <form asp-action="Register"
+                          method="post"
+                          enctype="multipart/form-data">
+
+                        <!-- PERSONAL INFO -->
+
+                        <h4 class="section-title">
+                            Personal Information
+                        </h4>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Full Name
+                                </label>
+
+                                <input name="Name"
+                                       class="form-control"
+                                       placeholder="Enter Full Name"
+                                       required />
+
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Email Address
+                                </label>
+
+                                <input type="email"
+                                       name="Email"
+                                       class="form-control"
+                                       placeholder="Enter Email"
+                                       required />
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Password
+                                </label>
+
+                                <input type="password"
+                                       name="Password"
+                                       class="form-control"
+                                       placeholder="Enter Password"
+                                       required />
+
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Phone Number
+                                </label>
+
+                                <input name="Phone"
+                                       class="form-control"
+                                       placeholder="Enter Phone Number"
+                                       required />
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Address
+                            </label>
+
+                            <textarea name="Address"
+                                      class="form-control"
+                                      placeholder="Enter Address"
+                                      required></textarea>
+
+                        </div>
+
+                        <!-- SERVICE INFO -->
+
+                        <h4 class="section-title mt-5">
+                            Service Information
+                        </h4>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Service Name
+                            </label>
+
+                            <input name="ServiceName"
+                                   class="form-control"
+                                   placeholder="Example: Gardening Service"
+                                   required />
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Service Description
+                            </label>
+
+                            <textarea name="Description"
+                                      class="form-control"
+                                      placeholder="Describe your service"
+                                      required></textarea>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Service Price
+                                </label>
+
+                                <input type="number"
+                                       name="Price"
+                                       class="form-control"
+                                       placeholder="Enter Price"
+                                       required />
+
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+
+                                <label class="form-label">
+                                    Category
+                                </label>
+
+                                <select name="CategoryId"
+                                        class="form-select"
+                                        required>
+
+                                    <option value="">
+                                        Select Category
+                                    </option>
+
+                                    @foreach (var item in ViewBag.Categories)
+                                    {
+                                        <option value="@item.CategoryId">
+                                            @item.CategoryName
+                                        </option>
+                                    }
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-5">
+
+                            <label class="form-label">
+                                Upload Service Image
+                            </label>
+
+                            <input type="file"
+                                   name="PhotoFile"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+                        <button type="submit"
+                                class="btn text-white w-100 register-btn">
+
+                            Register Provider
+
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-4">
+
+                        <span class="text-muted">
+                            Already have an account?
+                        </span>
+
+                        <a asp-action="Login"
+                           class="login-link">
+
+                            Login Here
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

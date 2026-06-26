@@ -1,0 +1,365 @@
+﻿<div class="container mt-5">
+@model List<DSM.Models.Entities.Service>
+
+@{
+    ViewData["Title"] = "Manage Services";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+
+            .sidebar h2 {
+                margin-bottom: 25px;
+            }
+
+            .sidebar a {
+                display: block;
+                color: #cbd5e1;
+                padding: 12px;
+                text-decoration: none;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+                .sidebar a:hover {
+                    background: #1e293b;
+                    color: white;
+                }
+
+    /* MAIN */
+
+    .main {
+        margin-left: 280px;
+        padding: 40px;
+    }
+
+    /* TOPBAR */
+
+    .topbar {
+        background: white;
+        padding: 22px 30px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+        .topbar h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 0;
+            color: #0f172a;
+        }
+
+        .topbar p {
+            margin: 0;
+            color: gray;
+        }
+
+    .badge-box {
+        background: #e2e8f0;
+        color: #0f172a;
+        padding: 8px 18px;
+        border-radius: 30px;
+        font-weight: 600;
+    }
+
+    /* TABLE CARD */
+
+    .table-card {
+        background: white;
+        border-radius: 22px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        overflow-x: auto;
+    }
+
+    /* TABLE */
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .custom-table thead {
+            background: #0f172a;
+            color: white;
+        }
+
+        .custom-table th {
+            padding: 18px;
+            font-size: 15px;
+        }
+
+        .custom-table td {
+            padding: 18px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .custom-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+    /* IMAGE */
+
+    .service-img {
+        width: 130px;
+        height: 85px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    /* STATUS */
+
+    .status-badge {
+        padding: 8px 14px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 600;
+        color: white;
+    }
+
+    .approved {
+        background: #16a34a;
+    }
+
+    .pending {
+        background: #f59e0b;
+    }
+
+    .rejected {
+        background: #dc2626;
+    }
+
+    /* BUTTONS */
+
+    .btn-edit {
+        background: #2563eb;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+        margin-right: 8px;
+    }
+
+        .btn-edit:hover {
+            background: #1d4ed8;
+            color: white;
+        }
+
+    .btn-delete {
+        background: #dc2626;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+            color: white;
+        }
+
+</style>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <h2>Admin Panel</h2>
+
+        <a asp-controller="Admin" asp-action="Dashboard">🏠 Dashboard</a>
+        <a asp-controller="Admin" asp-action="ManageUsers">👥 Manage Users</a>
+        <a asp-controller="Admin" asp-action="ManageProviders">🧑‍🔧 Providers</a>
+        <a asp-controller="Category" asp-action="Index">📂 Categories</a>
+        <a asp-controller="Admin" asp-action="ManageServices">🛎️ Services</a>
+        <a asp-controller="Admin" asp-action="ApproveServices">✅ Approvals</a>
+
+        <hr style="border-color:#334155;" />
+
+        <a asp-controller="Admin" asp-action="Logout" style="color:#f87171;">
+            🚪 Logout
+        </a>
+
+    </div>
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h1>Manage Services</h1>
+
+            <p>Manage and control all uploaded services</p>
+
+        </div>
+
+        <span class="badge-box">
+
+            Total Services:
+            @Model.Count
+
+        </span>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <table class="custom-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Image</th>
+
+                    <th>Service</th>
+
+                    <th>Provider</th>
+
+                    <th>Price</th>
+
+                    <th>Status</th>
+
+                    <th width="240">Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <!-- IMAGE -->
+
+                        <td>
+
+                            <img src="@item.PhotoURL"
+                                 class="service-img" />
+
+                        </td>
+
+                        <!-- SERVICE -->
+
+                        <td>
+
+                            <strong>
+                                @item.ServiceName
+                            </strong>
+
+                        </td>
+
+                        <!-- PROVIDER -->
+
+                        <td>
+
+                            @item.ProviderName
+
+                        </td>
+
+                        <!-- PRICE -->
+
+                        <td>
+
+                            <strong style="color:#16a34a;">
+
+                                ₹ @item.Price
+
+                            </strong>
+
+                        </td>
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            @if (item.Status == "Approved")
+                            {
+                                <span class="status-badge approved">
+
+                                    Approved
+
+                                </span>
+                            }
+                            else if (item.Status == "Pending")
+                            {
+                                <span class="status-badge pending">
+
+                                    Pending
+
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status-badge rejected">
+
+                                    Rejected
+
+                                </span>
+                            }
+
+                        </td>
+
+                        <!-- ACTION -->
+
+                        <td>
+
+                            <a asp-action="EditService"
+                               asp-route-id="@item.ServiceId"
+                               class="btn-edit">
+
+                                Edit
+
+                            </a>
+
+                            <a asp-action="DeleteService"
+                               asp-route-id="@item.ServiceId"
+                               class="btn-delete"
+                               onclick="return confirm('Delete this service?')">
+
+                                Delete
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,350 @@
+﻿@model DSM.Models.Entities.Service
+
+@{
+    var provider = ViewBag.Provider;
+    ViewData["Title"] = "Add Service";
+}
+
+<style>
+
+    body {
+        background: #f4f6fb;
+        font-family: 'Segoe UI';
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 260px;
+        height: 100vh;
+        background: #0f172a;
+        color: white;
+        position: fixed;
+        padding: 20px;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 25px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+            .sidebar a:hover {
+                background: #1e293b;
+                color: white;
+            }
+
+    /* MAIN CONTENT */
+
+    .main {
+        margin-left: 280px;
+        padding: 35px;
+    }
+
+    /* TOPBAR */
+
+    .topbar {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 18px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+        .topbar h3 {
+            font-size: 40px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .topbar p {
+            color: #64748b;
+            font-size: 18px;
+            margin: 0;
+        }
+
+    .badge-box {
+        background: #0f172a;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    /* FORM CARD */
+
+    .form-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+
+    .form-title {
+        font-size: 34px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 35px;
+    }
+
+    /* FORM */
+
+    .form-label {
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #0f172a;
+        font-size: 17px;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 14px;
+        padding: 14px 18px;
+        border: 1px solid #dbeafe;
+        font-size: 16px;
+        box-shadow: none !important;
+    }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #2563eb;
+        }
+
+    textarea.form-control {
+        resize: none;
+    }
+
+    /* ALERT */
+
+    .alert {
+        border-radius: 14px;
+        padding: 14px 18px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    /* BUTTON */
+
+    .btn-save {
+        background: linear-gradient(135deg,#2563eb,#3b82f6);
+        color: white;
+        border: none;
+        padding: 14px 35px;
+        border-radius: 14px;
+        font-size: 17px;
+        font-weight: 700;
+        transition: 0.3s;
+        box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+    }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg,#1d4ed8,#2563eb);
+        }
+
+</style>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h2>
+        Provider Panel
+    </h2>
+
+    <a asp-action="Dashboard">
+        🏠 Dashboard
+    </a>
+
+    <a asp-action="AddService"
+       class="active-menu">
+        ➕ Add Service
+    </a>
+
+    <a asp-action="ManageServices">
+        🛎️ My Services
+    </a>
+
+    <a asp-controller="Booking"
+       asp-action="BookingRequests">
+        📦 Booking Requests
+    </a>
+
+    <a asp-action="EditProfile">
+        👤 Edit Profile
+    </a>
+
+    <hr style="border-color:#334155;" />
+
+    <a asp-action="Logout"
+       style="color:#f87171;">
+        🚪 Logout
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h3>
+                Add New Service 🚀
+            </h3>
+
+            <p>
+                Create and publish your professional service
+            </p>
+
+        </div>
+
+        <span class="badge-box">
+            Provider Dashboard
+        </span>
+
+    </div>
+
+    <!-- FORM CARD -->
+
+    <div class="form-card">
+
+        <h2 class="form-title">
+            Service Details
+        </h2>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger mb-4">
+
+                @TempData["Error"]
+
+            </div>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success mb-4">
+
+                @TempData["Success"]
+
+            </div>
+        }
+
+        <form asp-action="AddService"
+              method="post"
+              enctype="multipart/form-data">
+
+            <!-- SERVICE NAME -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Service Name
+                </label>
+
+                <input asp-for="ServiceName"
+                       class="form-control"
+                       placeholder="Enter service name" />
+
+            </div>
+
+            <!-- DESCRIPTION -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <textarea asp-for="Description"
+                          class="form-control"
+                          rows="5"
+                          placeholder="Describe your service"></textarea>
+
+            </div>
+
+            <!-- PRICE -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Price
+                </label>
+
+                <input asp-for="Price"
+                       class="form-control"
+                       placeholder="Enter service price" />
+
+            </div>
+
+            <!-- CATEGORY -->
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Select Category
+                </label>
+
+                <select asp-for="CategoryId"
+                        class="form-select">
+
+                    <option value="">
+                        -- Select Category --
+                    </option>
+
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.CategoryId">
+
+                            @category.CategoryName
+
+                        </option>
+                    }
+
+                </select>
+
+            </div>
+
+            <!-- IMAGE -->
+
+            <div class="mb-5">
+
+                <label class="form-label">
+                    Upload Service Image
+                </label>
+
+                <input type="file"
+                       name="PhotoFile"
+                       class="form-control" />
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button type="submit"
+                    class="btn-save">
+
+                Add Service
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

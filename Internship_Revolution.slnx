@@ -1,0 +1,21 @@
+<Solution>
+  <Project Path="dotnetcore_training/dotnetcore_training.csproj" Id="43f04360-bb5b-49f9-97f4-a8dd49932215" />
+  <Project Path="DSM.Models/DSM.Models.csproj" Id="7722ff55-ca43-4d94-a36c-074642d65864" />
+  <Project Path="DSM.Repository/DSM.Repository.csproj" Id="6e423077-a4a7-4e9f-8292-afd1cc2302be" />
+  <Project Path="DSM.UI/DSM.UI.csproj" Id="fd01cdaa-2c53-4c74-8b61-20caf5b653d2" />
+  <Project Path="Edu.DAL/Edu.DAL.csproj" Id="e6c727be-7e27-4ee9-a1fe-c6da19be2a56" />
+  <Project Path="Edu.Models/Edu.Models.csproj" Id="de6cc026-1276-4be6-96e1-9016f8d5fd26" />
+  <Project Path="Edu.UI/Edu.UI.csproj" Id="9a5e08a8-23d6-47d5-aad9-740aa0a9a950" />
+  <Project Path="EM.Model/EM.Model.csproj" Id="1f866116-e417-4c5f-a587-0afcee6d41f5" />
+  <Project Path="EM.Repository/EM.Repository.csproj" Id="8fc0498c-5c12-4e55-987f-a240883e4d93" />
+  <Project Path="EM.UI/EM.UI.csproj" Id="2bf448c6-6853-460d-824d-4ea289966597" />
+  <Project Path="EMS.Models/EMS.Models.csproj" Id="ca9a16d4-fbf7-4d4f-9a21-549490ed1331" />
+  <Project Path="EMS.Repositories/EMS.Repositories.csproj" Id="d348a2a3-fcac-4fb3-988b-4837b8a16d3b" />
+  <Project Path="EMS.UI/EMS.UI.csproj" Id="a26b1339-a3bb-49ae-9954-e300a8cf32c3" />
+  <Project Path="LA.DAL/LA.DAL.csproj" Id="42ca0496-4456-4b32-8ad8-ba3c11454eae" />
+  <Project Path="LA.Models/LA.Models.csproj" Id="541202c9-e484-4037-8766-5ed066b5db8f" />
+  <Project Path="LA.UI/LA.UI.csproj" Id="dd345ce0-09d1-4a41-8313-2784062e4356" />
+  <Project Path="LibraryMemberPortal/LibraryMemberPortal.csproj" Id="0d7e5059-7f83-4853-8d92-d2ff8281fa66" />
+  <Project Path="Training/Training.csproj" Id="c654137a-4603-4b1d-9afb-cc34112f69a3" />
+  <Project Path="WebFormERP/WebFormERP.csproj" Id="3e0985ce-f7ce-4118-a54b-eb5fa0669d75" />
+</Solution>
